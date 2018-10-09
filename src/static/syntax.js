@@ -13,7 +13,7 @@ class syntax extends Component{
 			syntax:this.refs.syntaxin.value,
 			explain:this.refs.explainin.value,
 		};
-		const itemRefs=firebase.database().ref(this.refs.language.value);
+		const itemRefs=firebase.database().ref("/"+this.refs.language.value);
 		itemRefs.push(item);
 		this.refs.syntaxin.value=''
 		this.refs.explainin.value=''
@@ -35,6 +35,10 @@ class syntax extends Component{
     					<option value="Html"/>
     					<option value="Javascript"/>
     					<option value="React"/>
+    					<option value="Python"/>
+    					<option value="Linux"/>
+    					<option value="C"/>
+
 					</datalist>
 			</div>
 				<textarea id="textarea2" class="materialize-textarea large lg" placeholder="Explaination" ref='explainin' ></textarea>

@@ -1,29 +1,37 @@
 import React,{Component} from 'react'
 import {NavLink} from 'react-router-dom'
+import firebase from './firebase.js'
 class watchmain extends Component{
+
 	constructor(){
 		super();
+		var a;
+		var synlist=[],explainlist=[],languagelist=[];
+		const itemrefs=firebase.database().ref('Html');
 		this.state={
-			html:[
-					{heading:"some",syntax:"syntax",exp:"Explaination"},
-					{heading:"heading",syntax:"syntax",exp:"Explaination"},
-					{heading:"heading",syntax:"syntax",exp:"Explaination"},
-					{heading:"heading",syntax:"syntax",exp:"Explaination"}
-			]
+			syntax:[]
 		}
+	  firebase.database().ref("Html").once('value',function (snapshot) {
+		var a=snapshot.val();
+        const keys=Object.keys(a);
+        for(let i=0;i<keys.length;i++)
+        {
+      
+        			synlist.push(a[keys[i]].syntax);
+        }
+    	}).then(()=>
+ 	this.setState({
+ 		syntax:synlist,
+ 	}));
+
 	}
 
 	render(){
-		const html1 = this.state.html.map(html=>{
+	
 		return (
-		
-				<div>heading :{html.heading}</div>
-			
-			)
-		})
-		return(
-				<div>{html1}</div>
-		);
-	}
+		<div>
+			<div>heading :{this.state.syntax[0]}</div>
+		</div>
+		)};
 }
 export default watchmain
