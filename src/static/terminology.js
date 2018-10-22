@@ -3,17 +3,16 @@ import {NavLink } from 'react-router-dom'
 import firebase from './firebase.js'
 import store from './store/index'
 import {loadState} from './store/localstorage'
-class syntax extends Component{
+class terminology extends Component{
 	constructor(){
 		super();
 		this.handlesubmit=this.handlesubmit.bind(this);
-		this.state={
+			this.state={
 			users:loadState()
 		}
 	}
 	handlesubmit(e){
-
-		if(this.refs.language.value=="C++"||
+		if( this.refs.language.value=="C++"||
 			this.refs.language.value=="Java"||
 			this.refs.language.value=="Javascript"||
 			this.refs.language.value=="Html"||
@@ -23,11 +22,6 @@ class syntax extends Component{
 			this.refs.language.value=="C"||
 			this.refs.language.value=="Unity"||
 			this.refs.language.value=="Node"||
-			this.refs.language.value=="Csharp"||
-			this.refs.language.value=="Css"||
-			this.refs.language.value=="Linux"||
-			this.refs.language.value=="Angular"||
-			this.refs.language.value=="Flutter"||
 			this.refs.language.value=="Debian"||
 			this.refs.language.value=="Git"||
 			this.refs.language.value=="Django"||
@@ -35,12 +29,17 @@ class syntax extends Component{
 			this.refs.language.value=="Firebase"||
 			this.refs.language.value=="Mongodb"||
 			this.refs.language.value=="Mysql"||
+			this.refs.language.value=="Gnu"||
+			this.refs.language.value=="Csharp"||
+			this.refs.language.value=="Css"||
+			this.refs.language.value=="Angular"||
+			this.refs.language.value=="Flutter"||
 			this.refs.language.value=="Jquery"){
 			e.preventDefault();
 	 		var item={
 			syntax:this.refs.syntaxin.value,
 			explain:this.refs.explainin.value,
-			type:'syntax'
+			type:'terminology'
 			};
 			const itemRefs=firebase.database().ref("/"+this.refs.language.value);
 			itemRefs.push(item);
@@ -55,7 +54,7 @@ class syntax extends Component{
 	}
 	render(){console.log('I was triggered during render');
 		return(
-<div class="isfullh makeaimage grey lighten-3">
+<div class="isfullh grey lighten-3" >
 {this.state.users?
 <div>
 		      <nav class="N/A transparent z-depth-0">
@@ -72,13 +71,13 @@ class syntax extends Component{
       </nav>
 			<div class="container">
 	
-		
 			<div class="row">
-				<h1 class="center usealrichfonts">Syntax</h1>
+				<h1 class="center usealrichfonts">Jargons</h1>
 			</div>
 			<form onSubmit={this.handlesubmit}>
+			
 			<div class="row">
-				<input class="text col s6  changetoblack" placeholder="Syntax" ref='syntaxin'/>
+				<input class="text col s7 changetoblack" placeholder="Term" ref='syntaxin'/>
 				<input id="color" class="col s4 right changetoblack" list="suggestions" placeholder="Reference" ref='language'/>
 					<datalist id="suggestions">
     					<option value="C++"/>
@@ -87,19 +86,18 @@ class syntax extends Component{
     					<option value="Javascript"/>
     					<option value="React"/>
     					<option value="Python"/>
-    					<option value="Linux"/>
+    					<option value="Gnu"/>
     					<option value="C"/>
     					<option value="Unity"/>
     					<option value="Node"/>
     					<option value="Csharp"/>
     					<option value="Css"/>
-    					<option value="Gnu"/>
+    					<option value="Linux"/>
     					<option value="Angular"/>
     					<option value="Flutter"/>
     					<option value="Debian"/>
     					<option value="Django"/>
     					<option value="Git"/>
-    					<option value="Php"/>
     					<option value="Firebase"/>
     					<option value="Mysql"/>
     					<option value="Mongodb"/>
@@ -108,21 +106,23 @@ class syntax extends Component{
 
 			</div>
 			<div class="row">
-			<textarea id="textarea2" class="materialize-textarea changetoblack col s12 m12 l12 xl12 " placeholder="Explaination" ref='explainin' style={{height:'8rem'}} ></textarea>
+			<textarea id="textarea2" class="materialize-textarea changetoblack col s12 m12 l12 xl12 " placeholder="Explaination" ref='explainin' style={{height:'10rem'}} ></textarea>
 			</div>
-			<div class="row"></div>
+			<div class="row "></div>
 			<div class="row ">
-			<div class="col s12 right" style={{textAlign:'center',margin:'auto',flex:'1',alignItems: 'center'}}>
-			<button class="btn left s6 z-depth-4 grey lighten-3 " style={{color:'black'}}><i class="fas fa-save" style={{color:'black'}}></i>   Save</button> 
-			</div>
+
+			<button class="btn left s6 z-depth-4 transparent grey lighten-3" style={{color:'black'}}><i class="fas fa-save" style={{color:'black'}}></i>   Save</button> 
+
+
 			</div>
 			</form>
-			
-			<div class="row center">
+		
+			<div class="row"></div>
+		<div class="row center">
 					<div class="col s3 center black saved" style={{color:"white"}}></div>
 			</div>
 			</div>
-			</div>:	<div>
+			</div>:<div>
 			
 			<h1 class="ubuntu center">YOU NEED TO LOGIN</h1>
 			<div class="row center">
@@ -131,9 +131,8 @@ class syntax extends Component{
 			</div>
 			</div>
 			</div>}
-			
-</div>
+			</div>
 			);
 	}
 }
-export default syntax;
+export default terminology;
