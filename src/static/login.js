@@ -5,12 +5,16 @@ import store from './store/index.js'
 import {Provider} from 'react-redux'
 import {createStore} from 'redux'
 import {loadState,saveState,deleteit} from './store/localstorage'
+
+
 class login extends Component{
 
 	constructor()
 	{
 		
 		super();
+
+
 		this.state={
 			users:store.getState(),
 		}
@@ -35,13 +39,13 @@ class login extends Component{
 		auth.signInWithPopup(provider)
 		.then((result)=>{
 			const user=result.user;
-			
-
+			console.log("Workuibg")
 			store.dispatch({type:'user',payload:user})
-					saveState(store.getState())
+			saveState(store.getState())
 			this.setState({
 				users:loadState()
 			})
+	
 			console.log(store.getState())
 	
 		})
@@ -85,14 +89,18 @@ class login extends Component{
 
 			<div class="row">
 			<div class="center">
+			<form>
 			<button  onClick={this.logout} class="waves-effect waves-light btn"><i class="fab fa-google"></i>  Logout</button>
+			</form>
 			</div>
 			</div>
 			:
 			
 			<div class="row ">
 			<div class="center">
-			<button  onClick={this.login} class="waves-effect waves-light btn"><i class="fab fa-google"></i>  Login With Google</button>
+			<form >
+			<button onSubmit={this.login} class="waves-effect waves-light btn"><i class="fab fa-google"></i>  Login With Google</button>
+			</form>
 			</div>
 			</div>
 		}

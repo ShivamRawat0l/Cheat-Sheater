@@ -3,6 +3,7 @@ import {NavLink } from 'react-router-dom'
 import firebase from './firebase.js'
 import store from './store/index'
 import {loadState} from './store/localstorage'
+
 class syntax extends Component{
 	constructor(){
 		super();

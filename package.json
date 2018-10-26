@@ -4,8 +4,12 @@
   "private": true,
   "dependencies": {
     "@material-ui/core": "^3.1.2",
+    "axios": "^0.18.0",
+    "dns": "^0.2.2",
     "firebase": "^5.5.3",
     "install": "^0.12.2",
+    "net": "^1.0.2",
+    "nodemailer": "^4.6.8",
     "react": "^16.5.2",
     "react-dom": "^16.5.2",
     "react-loading-screen": "0.0.17",
