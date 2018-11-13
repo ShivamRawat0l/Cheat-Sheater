@@ -1,8 +1,11 @@
 import React, { Component } from 'react';
 import {NavLink} from 'react-router-dom'
-import firebase,{auth} from './firebase'
-import store from './store/index'
-import {loadState,deleteit} from './store/localstorage'
+import firebase,{auth,provider} from './firebase'
+import store from './store/index.js'
+import {Provider} from 'react-redux'
+import {createStore} from 'redux'
+import {loadState,saveState,deleteit} from './store/localstorage'
+import M from 'materialize-css'
 class index extends Component {
   constructor(){
     super();
@@ -33,9 +36,12 @@ class index extends Component {
     this.state={
     quote:quotes[ran],
     auth:authors[ran],
-    users: loadState()
+    users: loadState(),
+    hover:false,
     }
+    this.login=this.login.bind(this)
     this.logout=this.logout.bind(this)
+
   }
 
     logout(){
@@ -46,52 +52,61 @@ class index extends Component {
       this.setState({
       quote:this.state.quote,
       auth:this.state.auth,
-      users: loadState()
+      users: loadState(),
+          hover:false,
       })
       console.log(store.getState())
       
     })
   }
+  login(){
+    auth.signInWithPopup(provider)
+    .then((result)=>{
+      const user=result.user;
+      store.dispatch({type:'user',payload:user})
+      saveState(store.getState())
+      this.setState({
+        users:loadState()
+      })
+  
+      console.log(store.getState())
+  
+    })
+  }
+ 
+    componentDidMount(){
+
+    this.setState({
+      users:loadState(),
+    })
+    console.log(this.state)
+  }
   render() {
 
     return (
-      <div class="isfullh" style={back}>
-      <nav class="N/A transparent z-depth-0">
-      <div class="navbar-wrapper">
-         <ul class="right hide-on-mid usehifonts">
-            <li><NavLink to="/" style={{color:'white'}}>Home</NavLink></li>
-            <li><NavLink to="/watch" style={{color:'white'}}>Read</NavLink></li>
-            <li><NavLink to="/add" style={{color:'white'}}>Add</NavLink></li>
-        {
-          this.state.users? 
-          <li><NavLink to="/" style={{color:'white'}} onClick={this.logout}>Logout</NavLink></li>:
-            <li><NavLink to="/login" style={{color:'white'}}>Login</NavLink></li>
-          }
-            <li><NavLink to="/about" style={{color:'white'}}>About</NavLink></li>
-            <li><NavLink to="/contact" style={{color:'white'}}>Contact</NavLink></li>
-            <li><NavLink to="/help" style={{color:'white'}}>Help</NavLink></li>
-          </ul>
-      </div>
-      </nav>
+      <div className="isfullh" style={back}>
+
       <div class="row"></div>
       <div class="row"></div>
      
       <div class="row"></div>
       <div class="row"></div>
       <div class="row"></div>
-      <div class="center-align row useopenfonts container " style={quoted}>
-       " {this.state.quote} "
+      <div class="white container z-depth-5 "  style={mainquote} >
+      <div class="center-align row roboto container " style={quoted}>
+       "{this.state.quote}"
       </div>
-      <div class="useopenfonts " style={authored}>
+      <div class="roboto center" style={authored}>
       -{this.state.auth}
+      </div>
       </div>
       <div class="row"></div>
       <div class="row"></div>
       <div class="row"></div>
       <div class="row">
 
-      <div class="col s12 center-align" style={{position:'absolute',bottom:'100px',color:'black'}}>
-         <a href="https://www.youtube.com" style={{color:'white',fontSize:'30px',position:'absolute',bottom:'-25px'}}><i title="info" class="fas fa-info-circle"></i></a>
+      <div class="col s12 center-align" style={{marginTop:'20px',fontSize:'30px',color:'white'}}>
+         <a href="https://www.youtube.com" className={"link"} ><i title="info" style={{color:'white'}} class="fas fa-info-circle"></i></a>
       </div>
       </div>
       </div>
@@ -101,16 +116,24 @@ class index extends Component {
 const back={
 
   backgroundImage: 'url(' + require('./images/back.jpg') + ')' ,
-  backgroundSize:'cover'
+  backgroundSize:'cover',
+  backgroundRepeat:'repeat'
 }
 const quoted={
-  fontSize:'36px',
-  color:'white'
+  fontSize:'46px',
+  color:'black ',
+  fontWeight:'bold'
 }
 const authored={
-  fontSize:'25px',
-  position:'absolute',
-  right:'60px',
-  color:'white'
+  fontSize:'32px',
+  position:'relative',
+  color:'black',
 }
+const mainquote={
+  paddingTop:'30px',
+    borderRadius:'10px',
+  opacity:'0.9',
+  paddingBottom:'30px',
+}
+
 export default index;

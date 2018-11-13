@@ -7,8 +7,11 @@
     "axios": "^0.18.0",
     "dns": "^0.2.2",
     "firebase": "^5.5.3",
+    "firebase-admin": "^6.1.0",
+    "firebase-functions": "^2.1.0",
     "install": "^0.12.2",
-    "net": "^1.0.2",
+    "jquery": "^2.2.4",
+    "materialize-css": "^1.0.0-rc.2",
     "nodemailer": "^4.6.8",
     "react": "^16.5.2",
     "react-dom": "^16.5.2",
@@ -33,5 +36,9 @@
     "not dead",
     "not ie <= 11",
     "not op_mini all"
-  ]
+  ],
+  "devDependencies": {
+    "json-loader": "^0.5.7",
+    "net": "^1.0.2"
+  }
 }

@@ -38,18 +38,7 @@ class About extends React.Component{
 		return(
 
   <div class="isfullh">
-  <nav class="N/A transparent z-depth-0">
-      <div class="navbar-wrapper row">
-         <ul class="right hide-on-mid usehifonts ">
-            <li class="col s2 center"><NavLink to="/" style={{color:'white'}}>Home</NavLink></li>
-            <li><NavLink to="/add" style={{color:'white'}}>Add</NavLink></li>
-            <li><NavLink to="/watch" style={{color:'white'}}>Read</NavLink></li>
-            <li><NavLink to="/about" style={{color:'white'}}>About</NavLink></li>
-            <li><NavLink to="/contact" style={{color:'white'}}>Contact</NavLink></li>
-            <li><NavLink to="/help" style={{color:'white'}}>Help</NavLink></li>
-          </ul>
-      </div>
-      </nav>
+ 
    <div class="row">
       <div class="col s12 center-align inconsolate">
       <h1 style={{color:'white',outline:'none'}}><b>About</b></h1>

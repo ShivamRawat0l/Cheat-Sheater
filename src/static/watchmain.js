@@ -3,7 +3,8 @@ import {NavLink} from 'react-router-dom'
 import firebase from './firebase.js'
 import store from './store/index'
 import {loadState} from './store/localstorage'
-
+import M from 'materialize-css'
+import $ from 'jquery'
 class watchmain extends Component{
 
 	constructor(props){
@@ -16,12 +17,15 @@ class watchmain extends Component{
 			mainlist:[],
 			secondlist:[],
 			search:RegExp('.*','gmi'),
-			users:loadState()
+			users:loadState(),
+			arethese:false
 		}
-	  firebase.database().ref(this.props.match.params.language).once('value',function (snapshot) {
+	  firebase.database().ref(this.props.match.params.language).once('value', (snapshot)=> {
 		var a=snapshot.val();
 		if(a==null){
-			
+			this.setState({
+				arethese:true
+			})
 		}
 	else{
         const keys=Object.keys(a);
@@ -53,9 +57,8 @@ class watchmain extends Component{
  		mainlist:main,
  		secondlist:second,
  		search:RegExp('.*','gmi'),
-
-
- 	}));
+ 	})
+ 	);
     
 
     this.changeit=this.changeit.bind(this)
@@ -80,43 +83,36 @@ class watchmain extends Component{
 	}
 			
 	}
-
+	componentDidMount(){
+		M.AutoInit()
+	}
 	render(){
+
 		const main=this.state.mainlist.map(syn=>{
 
 			if(this.state.search.test(syn[0])||this.state.search.test(syn[1]))
-			return<tr> <td class="sourcecode"> {syn[0]}  </td> <td>{syn[1]}</td></tr>
+			return <li>
+      <div className="collapsible-header indigo darken-4 " style={{'color':'white'}}>{syn[0]}</div>
+      <div className="collapsible-body indigo lighten-4" ><span>{syn[1]}</span></div>
+    </li>
 		})
+		
 		const second=this.state.secondlist.map(syn=>{
 			if(this.state.search.test(syn[0])||this.state.search.test(syn[1]))
-			return<tr> <td> {syn[0]}  </td> <td>{syn[1]}</td></tr>
+			return<li>
+      <div className="collapsible-header indigo darken-4 " style={{'color':'white'}}>{syn[0]}</div>
+      <div className="collapsible-body indigo lighten-4" ><span>{syn[1]}</span></div>
+    </li>
 		})
-		if(second.length==0){second.push(<h4 class="center">You need to add something to see something</h4>)}
-		if(main.length==0){main.push(<h4 class="center">You need to add something to see something</h4>)}
-		return (
-		<div>
-<div>
-		  <nav class="N/A transparent z-depth-0">
-      <div class="navbar-wrapper">
-         <ul class="right hide-on-mid usehifonts">
-            <li><NavLink to="/" style={{color:'black'}}>Home</NavLink></li>
-            <li><NavLink to="/add" style={{color:'black'}}>Add</NavLink></li>
-            <li><NavLink to="/watch" style={{color:'black'}}>Read</NavLink></li>
-            <li><NavLink to="/about" style={{color:'black'}}>About</NavLink></li>
-            <li><NavLink to="/contact" style={{color:'black'}}>Contact</NavLink></li>
-            <li><NavLink to="/help" style={{color:'black'}}>Help</NavLink></li>
-          </ul>
-      </div>
-    
-      </nav>
-        <div class="row">
-      <ul class="tabs" style={{overflow:'hidden'}}>
-        <li class="tab col s6"><a href="#test3" class="black-text active">Syntax</a></li>
-        <li class="tab col s6"><a href="#test4" class="black-text">Terminology</a></li>
-      </ul>
+		if(this.state.arethese== true){second.push(<h4 class="center">Its looks empty</h4>)}
+		if(main.length==0 && second.length==0 ){main.push(<h4 class="center"><div class="progress">
+      <div class="indeterminate"></div> </div></h4>)}
 
- 
-  </div>
+
+		return (
+		<div >
+<div>
+		
         
 		<div class="row"></div>
 		<div class="heading center-align row exo"   style={{fontSize:'46px'}}>
@@ -130,42 +126,20 @@ class watchmain extends Component{
 	<input  class="col s10 m2 l2 xl2 right" placeholder="Search"  ref='expression' onChange={this.changeit}/>
 		
 </div>
-
-<div class="container" id="test3">
-
-	<table class="centered" >
-        <thead>
-          <tr>
-              <th>Syntax</th>
-              <th>Explanation</th>
-          </tr>
-        </thead>
-
-        <tbody>
-    {main}
-        </tbody>
-      </table>
-	</div>
-
-
-	<div class="container" id="test4">
-	<table class="centered">
-        <thead>
-          <tr >
-              <th>Term</th>
-              <th>Explanation</th>
-          </tr>
-        </thead>
-
-        <tbody>
-   			{second}	
-        </tbody>
-      </table>
-	</div>
+<div class="container row ">
+<ul className="collapsible" >
+{main}
+</ul>
 </div>
-
+<div class="container row ">
+	<ul class="collapsible" style={{'borderRadius':'20px','border':'transparent'}}>
+   			{second}	
+	</ul>
+</div>
+</div>
 		</div>
 
 		)};
 }
+
 export default watchmain

@@ -1,9 +1,15 @@
 import React,{Component} from 'react'
 import {NavLink} from 'react-router-dom'
 import firebase from './firebase.js'
+import store from './store/index'
+import {createStore} from 'redux'
+import {loadState,saveState,deleteit} from './store/localstorage'
 class help extends Component{
 	constructor(){
 		super()
+		this.state={
+			users:store.getState()
+		}
 		this.addtodatabase=this.addtodatabase.bind(this)
 	}
 
@@ -21,42 +27,57 @@ class help extends Component{
 		return(
 			
 			<div  class="isfullh" >
-			  <nav class="N/A transparent z-depth-0">
-      <div class="navbar-wrapper">
-         <ul class="right hide-on-mid usehifonts">
-            <li class="col s2 center"><NavLink to="/" style={{color:'black'}}>Home</NavLink></li>
-            <li><NavLink to="/add" style={{color:'black'}}>Add</NavLink></li>
-            <li><NavLink to="/watch" style={{color:'black'}}>Read</NavLink></li>
-            <li><NavLink to="/about" style={{color:'black'}}>About</NavLink></li>
-            <li><NavLink to="/contact" style={{color:'black'}}>Contact</NavLink></li>
-            <li><NavLink to="/help" style={{color:'black'}}>Help</NavLink></li>
-          </ul>
-      </div>
-      </nav>
-				<div class="container">
-					<div class="center roboto" style={{fontSize:'60px'}}><b><u>How to use</u></b></div>
-					<div class="row"></div>
-					<div class="nunito" style={{fontSize:'18px'}}>
-					<div>1. This website basically will collect information on programming and save it like cheat sheets  </div>
-					<div>2. To add your own commands and syntax for a perticular language go to the add tab in navbar</div>
-					<div>3. Choose if you want to add a syntax or a term using in that programming </div>
-					<div>4. Input the syntax and give the explaination.In the reference box input the language from the language that is suggested</div>
-					<div>5. If the programming language option is not available input it in the query box below</div>
-					<div>6. Your syntax is saved and the same process is for the terminology</div>
-					<div>7. To watch the whole cheat sheet just go to the watch nav bar and choose the language you want to see</div>
-					<div>8. You can input in the search bar if you want some specific results. Do not use any special character.s </div>
-					<div>9. If the output is NULL NULL it means that their is nothing right now </div>
-					<div>10. Any suggestion or help required write it down below</div>
-					<div>11. Click the info icon in the home page for video tutorial</div>
+			<div style={back} >
+			<div class="row"></div>
+				<div class="container white z-depth-3" style={{borderRadius:'10px',opacity:'0.95'}}>
+					<div class="center roboto left" style={{fontSize:'60px',paddingLeft:'30px'}}><b>Getting Started</b></div>
+					<div class="row">
+						<div class="col s12 l12 m12 ">
+						Cheat Sheet is a approach to make learning easy as we all know that when we learn something we tend 
+						forget is as we learn something else and then re-reading the documetation or watching tutorial is time 
+						consuming. Now you have the power to share anything new you learn and read what other people have learned.
+						It basically creates cheat-sheet but with more details.
+					</div></div>
+						<div class="center roboto left" style={{fontSize:'54px',paddingLeft:'30px'}}><b>   Why Cheat Sheet ? </b></div>
+					<div class="row">
+						<div class="col s12 l12 m12 ">
+						Whenever you learn something new you are only able to remember it only for a short span of time and then we forget
+						it and then just to find that topic it consumes a lot of time. You can have cheat sheet created by experts but you cannot
+						search through them and it mostly contains jargon. Cheat sheet is just like <b>DEMOCRACY.
+						  Cheat-Sheet is for the people,to the people, from the people. </b>
+					</div></div>
+
+					<div class="center roboto left" style={{fontSize:'54px',paddingLeft:'30px'}}><b>Efficiency</b></div>
+					<div class="row">
+						<div class="col s12 l12 m12 ">
+						Suppose you are learning something. <b>Don't</b> add something to the site while learning.<b>Don't</b> add something when
+						you are not sure that the thing you are adding is right or wrong.<b>Do </b> add when you are sure about things you are adding.
+						When learning something just try to learn that thing as much you can for that session and after the session is over than add 
+						everything that you have learned. This habit will ensure you are adding right stuff and it would revise your conecpt and it will 
+						make you time efficient as adding something everytime you read something new will take a long time.
+
+					</div></div>
+
+					<div class="center roboto left" style={{fontSize:'54px',paddingLeft:'30px'}}><b>Support</b></div>
+					<div class="row">
+						<div class="col s12 l12 m12 ">
+							You can write your suggetion below or email me at cheatsheetinc@gmail.com
+					</div></div>
+					<form onSubmit={this.addtodatabase} style={{paddingLeft:'20%'}}><div class="row">
+					<input ref='helpme'  placeholder='Suggestions '  class="changetoblack center col s12 m7 l7 xl7 "/>
+					<button class="btn  center col s6 l2 m2 xl2 purple darken-3">Send</button>
+					</div>
+					</form>
 				</div>
-				</div>
-				<div class="row"></div>
-				<form class="container" onSubmit={this.addtodatabase}>				<input ref='helpme'  placeholder='Name and Query' class="changetoblack col s12 m12 l12 xl12"/>
-				<div class="row"></div>
-				<div class="center"><button class="btn center">Send</button></div></form>
-				</div>	
+			
+				</div>	</div>	
 		
 			)
 	}
+}
+const back={
+
+  backgroundImage: 'url(' + require('./images/backhelp.jpg') + ')' ,
+  backgroundSize:'cover'
 }
 export default help

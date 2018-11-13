@@ -34,7 +34,18 @@ class terminology extends Component{
 			this.refs.language.value=="Css"||
 			this.refs.language.value=="Angular"||
 			this.refs.language.value=="Flutter"||
-			this.refs.language.value=="Jquery"){
+			this.refs.language.value=="Jquery"||
+			this.refs.language.value=="Sass"||
+			this.refs.language.value=="R"||
+			this.refs.language.value=="Bootstrap"||
+			this.refs.language.value=="Materilize"||
+			this.refs.language.value=="Lua"||
+			this.refs.language.value=="Puppeteer"||
+			this.refs.language.value=="Redux"||
+			this.refs.language.value=="Androidstudio"||
+			this.refs.language.value=="Kotlin"||
+			this.refs.language.value=="Electron"||
+			this.refs.language.value=="Scala"){
 			e.preventDefault();
 	 		var item={
 			syntax:this.refs.syntaxin.value,
@@ -49,26 +60,16 @@ class terminology extends Component{
 			setTimeout(()=>document.querySelector('.saved').innerHTML="",2000);
 		}
 		else{
-			alert("Choose language from valid option or request the admin to add the option ('C++,Java,Html,Javascript,Python,React,Linux,C,Unity,Node,Csharp,Css,Linux,Angular,Flutter,Django,Git,Php,Firebase,Mysql,Mongodb,Jquery')")
+			alert("Choose language from valid option or request the admin to add the option')")
 		}
 	}
 	render(){console.log('I was triggered during render');
 		return(
 <div class="isfullh grey lighten-3" >
+<div class="row"></div><div class="row"></div>
 {this.state.users?
 <div>
-		      <nav class="N/A transparent z-depth-0">
-      <div class="navbar-wrapper">
-         <ul class="right hide-on-mid usehifonts">
-            <li><NavLink to="/" style={{color:'black'}}>Home</NavLink></li>
-            <li><NavLink to="/add" style={{color:'black'}}>Add</NavLink></li>
-            <li><NavLink to="/watch" style={{color:'black'}}>Read</NavLink></li>
-            <li><NavLink to="/about" style={{color:'black'}}>About</NavLink></li>
-            <li><NavLink to="/contact" style={{color:'black'}}>Contact</NavLink></li>
-            <li><NavLink to="/help" style={{color:'black'}}>Help</NavLink></li>
-          </ul>
-      </div>
-      </nav>
+
 			<div class="container">
 	
 			<div class="row">
@@ -102,6 +103,17 @@ class terminology extends Component{
     					<option value="Mysql"/>
     					<option value="Mongodb"/>
     					<option value="Jquery"/>
+    					<option value="Lua"/>
+    					<option value="Bootstrap"/>
+    					<option value="R"/>
+    					<option value="Sass"/>
+    					<option value="Materilize"/>
+    					<option value="Puppeteer"/>
+    					<option value="Redux"/>
+    					<option value="Androidstudio"/>
+    					<option value="Kotlin"/>
+    					<option value="Electron"/>
+    					<option value="Scala"/>
 					</datalist>
 
 			</div>
