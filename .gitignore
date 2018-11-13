@@ -6,6 +6,7 @@
 /node_modules
 
 
+firebase.js
 node_modules/
 
 # testing
